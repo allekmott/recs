@@ -9,6 +9,8 @@
 
 #include <stdio.h>
 
+#include "list.h"
+
 #define RECS_VERSION "0.0.1"
 
 void version() {
