@@ -11,13 +11,13 @@
 
 #include "list.h"
 
-#define RECS_VERSION "0.0.2"
+#define RECS_VERSION "0.0.3"
 
 void version() {
 	printf("recs v%s\n", RECS_VERSION);
 }
 
-void test() {
+void write_test() {
 	struct artist head;
 	head.name = "My Bloody Valentine";
 	
@@ -48,7 +48,11 @@ void test() {
 	print_artist(&head);
 	print_artist(head.next);
 
-	write_list(&head, "lol.txt");
+	write_artists(&head, "lol.txt");
+}
+
+void read_test() {
+	struct artist *head = read_artists("lol.txt");
 }
 
 int main(int argc, char const *argv[]) {

@@ -12,12 +12,12 @@
 
 
 struct album {
-	const char *name;
+	char *name;
 	struct album *next;
 };
 
 struct artist {
-	const char *name;
+	char *name;
 	struct album *discog;
 	struct artist *next;
 };
@@ -29,19 +29,22 @@ void print_discog(const struct album *head);
 void print_artist(const struct artist *a);
 
 /* Write entire artist list to file specified by filename */
-int write_list(const struct artist *head, const char *filename);
+int write_artists(const struct artist *head, const char *filename);
 
 /* Write artist's discography to file (used by write_list) */
 void write_discog(const struct album *discog, FILE *out);
 
 /* Read artist list in from file
  * *!ALLOCATES HEAP MEMORY!*
- * free_list call necessary.
+ * free_artists call necessary.
  * TODO: memset to zero out
  */
-struct artist *read_list(const char *filename);
+struct artist *read_artists(const char *filename);
 
 /* Frees entire artist list */
-void free_list(struct artist *head);
+void free_artists(struct artist *head);
+
+/* Frees entire album list (discography) */
+void free_discog(struct album *discog);
 
 #endif
