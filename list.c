@@ -20,6 +20,14 @@ void print_discog(const struct album *head) {
 	}
 }
 
+void print_artists(const struct artist *head) {
+	const struct artist *a = head;
+	while (a != NULL) {
+		print_artist(a);
+		a = a->next;
+	}
+}
+
 void print_artist(const struct artist *a) {
 	printf("%s\n", a->name);
 	print_discog(a->discog);
@@ -78,10 +86,11 @@ struct artist *read_artists(const char *filename) {
 	struct album *discog = NULL;
 	struct album *latest_album;
 	
+	struct artist *new_artist;
+	struct album *new_album;
+
 	char buf[100];
 	while (fgets(buf, 100, in) != NULL) {
-		struct artist *new_artist;
-		struct album *new_album;
 
 		/* pull name from buffer, remove whitespace */
 		char *name = malloc(strlen(buf));
@@ -132,7 +141,7 @@ struct artist *read_artists(const char *filename) {
 					latest_artist->next = new_artist;
 
 					/* flush discog */
-					new_artist->discog = discog;
+					latest_artist->discog = discog;
 					discog = latest_album = NULL;
 
 					/* move latest to new */
@@ -140,7 +149,9 @@ struct artist *read_artists(const char *filename) {
 				}
 		}
 	}
-
+	if (discog != NULL)
+		latest_artist->discog = discog;
+	
 	return head_artist;
 }
 

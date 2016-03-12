@@ -25,6 +25,9 @@ struct artist {
 /* Prints out entire discography list */
 void print_discog(const struct album *head);
 
+/* Prints out entire artist list */
+void print_artists(const struct artist *head);
+
 /* Prints artist's name, along with discography */
 void print_artist(const struct artist *a);
 

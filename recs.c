@@ -54,6 +54,8 @@ void write_test() {
 void read_test() {
 	struct artist *head = read_artists("lol.txt");
 	printf("\n\n");
+	print_artists(head);
+	printf("\n\n");
 	free_artists(head);
 }
 
