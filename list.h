@@ -44,7 +44,13 @@ struct artist *read_artists(const char *filename);
 /* Frees entire artist list */
 void free_artists(struct artist *head);
 
+/* Free artist struct (recursive) */
+void free_artist(struct artist *a);
+
 /* Frees entire album list (discography) */
 void free_discog(struct album *discog);
+
+/* Free album struct (recursive) */
+void free_album(struct album *a);
 
 #endif

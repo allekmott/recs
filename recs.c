@@ -11,7 +11,7 @@
 
 #include "list.h"
 
-#define RECS_VERSION "0.0.3"
+#define RECS_VERSION "0.0.4"
 
 void version() {
 	printf("recs v%s\n", RECS_VERSION);
@@ -53,9 +53,12 @@ void write_test() {
 
 void read_test() {
 	struct artist *head = read_artists("lol.txt");
+	printf("\n\n");
+	free_artists(head);
 }
 
 int main(int argc, char const *argv[]) {
 	version();
+	read_test();
 	return 0;
 }

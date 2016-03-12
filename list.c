@@ -123,7 +123,7 @@ struct artist *read_artists(const char *filename) {
 					/* first artist read */
 					if (discog != NULL) {
 						/* album read before first artist, formatting error */
-						free(new_artist);
+						free_artist(new_artist);
 						return NULL;
 					}
 					head_artist = latest_artist = new_artist;
@@ -145,9 +145,42 @@ struct artist *read_artists(const char *filename) {
 }
 
 void free_artists(struct artist *head) {
+	if (head == NULL)
+		return;
 
+	printf("Freeing artist list starting with %s\n", head->name);
+	free_artist(head);
+}
+
+void free_artist(struct artist *a) {
+	if (a == NULL)
+		return;
+
+	printf("Freeing artist %s\n", a->name);
+
+	if (a->next != NULL)
+		free_artist(a->next);
+
+	free_discog(a->discog);
+	free(a);
 }
 
 void free_discog(struct album *discog) {
+	if (discog == NULL)
+		return;
 
+	printf("Freeing discography starting with %s\n", discog->name);
+	free_album(discog);
+}
+
+void free_album(struct album *a) {
+	if (a == NULL)
+		return;
+
+	printf("Freeing album %s\n", a->name);
+
+	if (a->next != NULL)
+		free_album(a->next);
+
+	free(a);
 }
