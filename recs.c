@@ -8,13 +8,42 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 
+#include "recs.h"
 #include "list.h"
 
-#define RECS_VERSION "0.0.4"
+#define RECS_VERSION "0.0.5"
+
+int main(int argc, char *argv[]) {
+	version();
+
+	char *list_file = "list.txt";
+	struct artist *list;
+
+	void (*op) (const char *);
+
+	/* if you couldn't tell, I love this thing */
+	int c;
+	while ((c = getopt(argc, argv, "c")) != -1) {
+		switch (c) {
+			case 'c': op = create_list; break;
+			case '?':
+			default: usage(argv[0]);
+		}
+	}
+
+	return 0;
+}
 
 void version() {
 	printf("recs v%s\n", RECS_VERSION);
+}
+
+void usage(const char *cmd) {
+	printf("Usage: %s [args]\n", cmd);
+	exit(0);
 }
 
 void write_test() {
@@ -57,10 +86,4 @@ void read_test() {
 	print_artists(head);
 	printf("\n\n");
 	free_artists(head);
-}
-
-int main(int argc, char const *argv[]) {
-	version();
-	read_test();
-	return 0;
 }

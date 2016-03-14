@@ -5,7 +5,7 @@ LIB_FLAGS=
 CFLAGS=$(LIB_FLAGS)
 
 EXE=recs
-DEPS=list.h
+DEPS=list.h recs.h
 OBJ_DEPS=list.o recs.o
 
 %.o: %.c $(DEPS)

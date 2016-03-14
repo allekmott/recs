@@ -40,7 +40,6 @@ void write_discog(const struct album *discog, FILE *out);
 /* Read artist list in from file
  * *!ALLOCATES HEAP MEMORY!*
  * free_artists call necessary.
- * TODO: memset to zero out
  */
 struct artist *read_artists(const char *filename);
 
